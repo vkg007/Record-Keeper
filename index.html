@@ -1,112 +1,112 @@
 <!DOCTYPE html>
-<!-- saved from url=(0057)https://colorlib.com/etc/tb/Table_Fixed_Column/index.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Table V05</title>
+<html>
+<head>
+  <style>
+   </style>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN -->
+  <link href=
+            "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity=
+            "sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <link rel="icon" type="image/png" href="https://colorlib.com/etc/tb/Table_Fixed_Column/images/icons/favicon.ico">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/bootstrap.min.css">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/font-awesome.min.css">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/animate.css">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/select2.min.css">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/perfect-scrollbar.css">
-
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/util.css">
-  <link rel="stylesheet" type="text/css" href="./Table V05_files/main.css">
-
-  <meta name="robots" content="noindex, follow">
-
-<body data-new-gr-c-s-check-loaded="14.1104.0" data-gr-ext-installed="">
-<p id="showData"></p>
-<div class="limiter">
-  <div class="container-table100">
-    <div class="wrap-table100">
-      <div class="table100 ver1">
-        <div class="table100-firstcol">
-          <table>
-            <thead>
-            <tr class="row100 head">
-              <th class="cell100 column1">Project</th>
-            </tr>
-            </thead>
-            <tbody id="project-name">
-            </tbody>
-          </table>
-        </div>
-        <div class="wrap-table100-nextcols js-pscroll ps ps--active-x">
-          <div class="table100-nextcols">
-            <table>
-              <thead>
-              <tr class="row100 head">
-                <th class="cell100 column2">Topic</th>
-                <th class="cell100 column3">GitHub repo</th>
-                <th class="cell100 column4">Jenkins </th>
-                <th class="cell100 column5">Swagger</th>
-                <th class="cell100 column6">Alva Doc</th>
-                <th class="cell100 column7">PO contact</th>
-                <th class="cell100 column8">Tech Used</th>
-              </tr>
-              </thead>
-              <tbody id="data-output">
-              </tbody>
-            </table>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
-          <div class="ps__rail-x" style="width: 1166px; left: 0px; bottom: 10px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 688px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-      </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
-  </div>
+  </nav>
+</head>
+<body onLoad="get_data()">
+
+
+
+<div class="table-responsive" id="showData">
 </div>
+</body>
 
-<script src="./Table V05_files/jquery-3.2.1.min.js"></script>
-
-<script src="./Table V05_files/popper.js"></script>
-<script src="./Table V05_files/bootstrap.min.js"></script>
-
-<script src="./Table V05_files/select2.min.js"></script>
-
-<script src="./Table V05_files/perfect-scrollbar.min.js"></script>
 <script>
-		$('.js-pscroll').each(function(){
-			var ps = new PerfectScrollbar(this);
+  let arrBirds;
 
-			$(window).on('resize', function(){
-				ps.update();
-			})
+  let get_data = async() => {
+    let url ="https://opensheet.elk.sh/1MMzVXNwkPPD85HTwXU7tbvFw46o5I_qwNrsOWpw1VuI/sheet1";
+    let response = await fetch (url);
+    arrBirds = await response.json();	// fill array with data.
 
-			$(this).on('ps-x-reach-start', function(){
-				$(this).parent().find('.table100-firstcol').removeClass('shadow-table100-firstcol');
-			});
+    make_the_table();		// convert data to table.
+  }
 
-			$(this).on('ps-scroll-x', function(){
-				$(this).parent().find('.table100-firstcol').addClass('shadow-table100-firstcol');
-			});
+  let make_the_table = () => {
+    // Extract value from table header.
+    let col = [];
+    for (let i = 0; i < arrBirds.length; i++) {
+      for (let key in arrBirds[i]) {
+        if (col.indexOf(key) === -1) {
+          col.push(key);
+        }
+      }
+    }
 
-		});
+    // Create a table.
+    const table = document.createElement("table");
+    table.setAttribute('class', 'table table-bordered');
 
+    // Create table header row using the extracted headers above.
+    let tr = table.insertRow(-1);                 // table row.
 
+    for (let i = 0; i < col.length; i++) {
+      let th = document.createElement("th");      // table header.
+      th.setAttribute('class', 'table-info');
 
+      th.innerHTML = col[i].toUpperCase();;
+      tr.appendChild(th);
+    }
 
-	</script>
+    // add json data to the table as rows.
+    for (let i = 0; i < arrBirds.length; i++) {
 
-<script async="" src="./Table V05_files/js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      tr = table.insertRow(-1);
 
-  gtag('config', 'UA-23581568-13');
+      for (let j = 0; j < col.length; j++) {
+        let tabCell = tr.insertCell(-1);
+        tabCell.innerHTML = arrBirds[i][col[j]];
+      }
+    }
+
+    // Now, add the newly created table with json data, to a container.
+    const divShowData = document.getElementById('showData');
+    divShowData.innerHTML = "";
+    divShowData.appendChild(table);
+  }
 </script>
-
-<script src="./Table V05_files/main.js"></script>
-<script defer="" src="./Table V05_files/v2b4487d741ca48dcbadcaf954e159fc61680799950996" integrity="sha512-D/jdE0CypeVxFadTejKGTzmwyV10c1pxZk/AqjJuZbaJwGMyNHY3q/mTPWqMUnFACfCTunhZUVcd4cV78dK1pQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;7b5d46479b971bd4&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;,&quot;version&quot;:&quot;2023.3.0&quot;,&quot;si&quot;:100}" crossorigin="anonymous"></script>
-
-<!-- Application-level javascript-->
-<script src='./Table V05_files/logic.js'></script>
-
-<div id="crx-root"><div class="Gl1LytS7IKm0kbznepy9"><div></div></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+</html>
